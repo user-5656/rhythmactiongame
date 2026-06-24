@@ -10,6 +10,15 @@ public class TimeKeeper : MonoBehaviour
     private bool OnGame_path;
 
     private bool OutGame_path;
+
+    private int elapsedCOunt = 0;
+
+    private int Notes_timingNumber = 0;
+    private bool isListUpdateTarget = false;
+
+    private NotesManager_M NotesManagerObject;
+
+    
     void Awake()
     {
         
@@ -18,10 +27,16 @@ public class TimeKeeper : MonoBehaviour
     void Start()
     {   
         
-        timer.AutoReset = false;
+        timer.AutoReset = true;
         timer.Elapsed += (System.Object source, ElapsedEventArgs e) =>
         {
-            Debug.Log("これはログだよ。");
+            elapsedCOunt++;
+            if(elapsedCOunt == 10000)
+            {
+                Debug.Log("0.1秒");
+                isListUpdateTarget = true;
+            }
+            Debug.Log("この前に0.1がくるよ");
         };
         timer.Start();
  
@@ -38,8 +53,14 @@ public class TimeKeeper : MonoBehaviour
         {
             timer.Start();
         }
-        
-    }
+        if(isListUpdateTarget == true)
+        {
+            isListUpdateTarget = false;
+            NotesManager_M notesManager_MScript= NotesManagerObject.GetComponent<NotesManager_M>();
+            notesManager_MScript.Notes_timing[Notes_timingNumber] = true;
+            Notes_timingNumber++;
+        }
+    }   
 
     void Dispose()
     {
@@ -50,4 +71,13 @@ public class TimeKeeper : MonoBehaviour
             timer = null;
         }
     }
+
+    void testDispose()
+    {
+        timer.Stop();
+        timer.Dispose();
+        timer = null;
+        Debug.Log("タイマー消したよ");
+    }
+    
 }
