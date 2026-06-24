@@ -60,6 +60,14 @@ public class TimeKeeper : MonoBehaviour
             notesManager_MScript.Notes_timing[Notes_timingNumber] = true;
             Notes_timingNumber++;
         }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            
+         timer.Stop();
+         timer.Dispose();
+         timer = null;
+         Debug.Log("タイマー消したよ");
+        }
     }   
 
     void Dispose()
@@ -72,12 +80,5 @@ public class TimeKeeper : MonoBehaviour
         }
     }
 
-    void testDispose()
-    {
-        timer.Stop();
-        timer.Dispose();
-        timer = null;
-        Debug.Log("タイマー消したよ");
-    }
-    
+   
 }

@@ -21,9 +21,14 @@ public class cameranitotgekirusumitame : MonoBehaviour
         for(int i = 0;i < 2;i++){
          if(notesManager_MScript.Notes_timing[i] == true)
              {
-                  _progress = _progress + v * Time.deltaTime * nibunnnoiti; //x=1/2*a*t^2=v*t*1/2という理論
-                  transform.position = Vector3.Lerp(_startPosition, _goalPosition, _progress);
+                  SubUpdate();
              }
         }
+    }
+
+    void SubUpdate()
+    {
+        _progress = _progress + v * Time.deltaTime * nibunnnoiti; //x=1/2*a*t^2=v*t*1/2という理論
+        transform.position = Vector3.Lerp(_startPosition, _goalPosition, _progress);
     }
 }
