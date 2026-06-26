@@ -10,7 +10,7 @@ public class cameranitotgekirusumitame : MonoBehaviour
         private float _progress = 0.0f;
         private readonly float nibunnnoiti = 1/2f;
 
-        private NotesManager_M NotesManagerObject;
+        [SerializeField] private NotesManager_M NotesManagerObject;
         
 
   
@@ -21,14 +21,18 @@ public class cameranitotgekirusumitame : MonoBehaviour
         for(int i = 0;i < 2;i++){
          if(notesManager_MScript.Notes_timing[i] == true)
              {
-                  SubUpdate();
+                  move();
              }
         }
     }
 
-    void SubUpdate()
+    void move()
     {
-        _progress = _progress + v * Time.deltaTime * nibunnnoiti; //x=1/2*a*t^2=v*t*1/2という理論
-        transform.position = Vector3.Lerp(_startPosition, _goalPosition, _progress);
+        for(int j = 0; j< 10000;j++)
+        {
+            _progress = _progress + v * Time.deltaTime * nibunnnoiti; //x=1/2*a*t^2=v*t*1/2という理論
+            transform.position = Vector3.Lerp(_startPosition, _goalPosition, _progress);   
+        }
+        
     }
 }

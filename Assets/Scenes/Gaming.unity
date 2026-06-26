@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf2f249c8bea7848a602e2b0366154b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameranitotgekirusumitame
+  NotesManagerObject: {fileID: 1022858066}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

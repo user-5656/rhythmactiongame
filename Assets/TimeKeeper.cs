@@ -6,7 +6,7 @@ public class TimeKeeper : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    System.Timers.Timer timer = new System.Timers.Timer(0.01);
+    System.Timers.Timer timer = new System.Timers.Timer(1);
     private bool OnGame_path;
 
     private bool OutGame_path;
@@ -28,6 +28,10 @@ public class TimeKeeper : MonoBehaviour
     {   
         
         timer.AutoReset = true;
+      
+        timer.Start();
+        
+
         timer.Elapsed += (System.Object source, ElapsedEventArgs e) =>
         {
             elapsedCOunt++;
@@ -38,20 +42,26 @@ public class TimeKeeper : MonoBehaviour
             }
             Debug.Log("この前に0.1がくるよ");
         };
-        timer.Start();
- 
-    }
-    
-      
 
-    // Update is called once per frame
-    
-    void Update()
-    {
         OnGame_path = GameManager.instance.OnGame;
         if (OnGame_path == true)
         {
             timer.Start();
+        }
+        
+
+ 
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            
+          timer.Stop();
+          timer.Dispose();
+          timer = null;
+          Debug.Log("タイマー消したよ");
         }
         if(isListUpdateTarget == true)
         {
@@ -60,17 +70,13 @@ public class TimeKeeper : MonoBehaviour
             notesManager_MScript.Notes_timing[Notes_timingNumber] = true;
             Notes_timingNumber++;
         }
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            
-         timer.Stop();
-         timer.Dispose();
-         timer = null;
-         Debug.Log("タイマー消したよ");
-        }
-    }   
+    }
 
-    void Dispose()
+    // Update is called once per frame
+
+
+
+    void OnDestroy()
     {
         if (OutGame_path == true)
         {
