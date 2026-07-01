@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TimeKeeper : MonoBehaviour
 {
@@ -16,14 +17,20 @@ public class TimeKeeper : MonoBehaviour
     private int Notes_timingNumber = 0;
     private bool isListUpdateTarget = false;
 
+    private InputAction StopTimer;
+
     private NotesManager_M NotesManagerObject;
 
     
     void Awake()
     {
-        
+        StopTimer = InputSystem.actions.FindActionMap("TImer_stop_key").FindAction("Stop") ;
     }
-    
+
+    void OnEnable()
+    {
+        StopTimer.started += OnMove;
+    }
     void Start()
     {   
         
@@ -76,15 +83,16 @@ public class TimeKeeper : MonoBehaviour
 
 
 
-    void OnDestroy()
+    void OnMove(InputAction.CallbackContext context)
     {
-        if (OutGame_path == true)
+
+    }
+
+   /*   if (OutGame_path == true)
         {
             timer.Stop();
             timer.Dispose();
             timer = null;
         }
-    }
-
-   
+    */
 }
